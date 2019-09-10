@@ -7,6 +7,7 @@ const goalTrackerRoutes = express.Router();
 const PORT = 4000;
 
 let Goal = require('./goal.model');
+let Activity = require('./activity.model');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,6 +29,13 @@ goalTrackerRoutes.route('/').get(function(req, res) {
     });
 });
 
+goalTrackerRoutes.route('/goal/:id').get(function(req, res) {
+    let id = req.params.id;
+    Goal.findById(id, function(err, goal) {
+        res.json(goal);
+    });
+});
+
 goalTrackerRoutes.route('/add').post(function(req, res) {
     let goal = new Goal(req.body);
     goal.save()
@@ -37,6 +45,27 @@ goalTrackerRoutes.route('/add').post(function(req, res) {
         .catch(err => {
             res.status(400).send('adding new goal failed');
         });
+});
+
+goalTrackerRoutes.route('/oneactivity').post(function(req, res) {
+    let activity = new Activity(req.body);
+    activity.save()
+            .then(activity => {
+                res.status(200).json({'activity': 'activity entered successfully'});
+            })
+            .catch(err => {
+                res.status(400).send('entering activity failed');
+            });
+});
+
+goalTrackerRoutes.route('/listactivity').get(function(req, res) {
+    Activity.find(function(err, activities) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(activities);
+        }
+    });
 });
 
 app.use('/goals', goalTrackerRoutes);
