@@ -6,7 +6,7 @@ let Activity = new Schema({
         type: String
     },
     act_quantity: {
-        type: String
+        type: Number
     },
     act_quant_uom: {
         type: String

@@ -68,6 +68,17 @@ goalTrackerRoutes.route('/listactivity').get(function(req, res) {
     });
 });
 
+goalTrackerRoutes.route('/listactivity/:action').get(function(req, res) {
+    let action = req.params.action;
+    Activity.find({ act_action: action },function(err, activities) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(activities);
+        }
+    });
+});
+
 app.use('/goals', goalTrackerRoutes);
 
 app.listen(PORT, function() {
