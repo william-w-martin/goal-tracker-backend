@@ -1,5 +1,5 @@
 ﻿# Unnamed Goal Tracker App - Back End
-Uses NodeJS and MongoDB
+Uses Node.js and MongoDB
  
 Created based on the MERN stack tutorial found here:
 https://codingthesmartway.com/the-mern-stack-tutorial-building-a-react-crud-application-from-start-to-finish-part-1/
